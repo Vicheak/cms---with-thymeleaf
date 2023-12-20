@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <th:block th:replace="~{/fragments/meta}"></th:block>
+
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">CMS</title>
+
+    <th:block th:replace="~{/fragments/styles}"></th:block>
+</head>
+
+<body>
+<div class="wrapper">
+
+    <!-- Left Side Bar Fragment -->
+    <div th:replace="~{/fragments/leftSideBar}"></div>
+
+    <div class="main">
+
+        <!-- Header Fragment -->
+        <div th:replace="~{/fragments/header}"></div>
+
+        <main class="content">
+            <div class="container-fluid p-0" layout:fragment="content">
+
+                <!-- Child content will render here -->
+
+            </div>
+        </main>
+
+        <!-- Footer Fragment -->
+        <div th:replace="~{/fragments/footer}"></div>
+
+    </div>
+
+</div>
+
+<!-- Scripts Fragment -->
+<div th:replace="~{/fragments/scripts}"></div>
+
+<th:block layout:fragment="childScript">
+
+    <!--Child script will render here -->
+
+</th:block>
+
+</body>
+
+</html>
