@@ -3,13 +3,13 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layouts/adminLayout}">
+      layout:decorate="~{/layouts/adminLayoutSleek}">
 <head>
     <title>Content Dashboard</title>
 </head>
 
 <body>
-<div class="container-fluid p-0" layout:fragment="content">
+<div class="content" layout:fragment="contentSleek">
 
     <!-- Child content will render here -->
 
@@ -44,14 +44,16 @@
                         <td th:text="*{keyword}"></td>
                         <td th:text="*{description}"></td>
                         <td>
-                            <img th:src="'http://localhost:8080/admin/file/' + *{thumbnail}" th:alt="*{thumbnail}"
-                            width="40px" height="auto">
+                            <img th:src="@{/file/{thumbnail}(thumbnail = *{thumbnail})}" th:alt="*{thumbnail}"
+                                 width="40px" height="auto">
                         </td>
                         <td th:text="*{createdAt}"></td>
                         <td>
-                            <a href="#" class="text-primary">View</a>|
-                            <a href="#" class="text-success">Edit</a>|
-                            <a href="#" class="text-danger">Delete</a>
+                            <a th:href="@{/content/{id}/detail(id = *{id})}" class="text-primary">View</a>|
+                            <a th:href="@{/content/{id}/edit(id = *{id})}" class="text-success">Edit</a>|
+                            <!-- Button trigger modal -->
+                            <a class="text-danger"
+                               data-bs-toggle="modal" data-bs-target="#confirmationModal">Delete</a>
                         </td>
                     </tr>
                     </tbody>
@@ -59,6 +61,13 @@
             </div>
         </div>
     </div>
+
+    <!-- Confirmation Modal Fragment -->
+    <div th:replace="~{/fragments/modal :: confirmationModal}"></div>
+
+    <th:block layout:fragment="childScriptSleek">
+
+    </th:block>
 
 </div>
 </body>
