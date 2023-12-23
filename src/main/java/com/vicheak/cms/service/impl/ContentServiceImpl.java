@@ -27,7 +27,17 @@ public class ContentServiceImpl implements ContentService {
         content.setUuid(UUID.randomUUID().toString());
         content.setSlug(SlugUtil.toSlug(content.getTitle()));
         content.setCreatedAt(LocalDateTime.now());
-        contentRepository.insert(content);
+        contentRepository.insert(content, content.getCategory().getId());
+    }
+
+    @Override
+    public void deleteContentById(Integer id) {
+        //boolean isDeleted = contentRepository.deleteById(id);
+
+        boolean isDeleted = contentRepository.updateIsDeletedById(id, true);
+
+        if(!isDeleted)
+            throw new RuntimeException("Content is failed to be deleted!");
     }
 
 }

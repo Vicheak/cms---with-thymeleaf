@@ -24,4 +24,12 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.insert(category);
     }
 
+    @Override
+    public void deleteCategoryById(Integer id) {
+        boolean isDeleted = categoryRepository.updateIsDeletedById(id, true);
+
+        if(!isDeleted)
+            throw new RuntimeException("Category is failed to be deleted!");
+    }
+
 }
