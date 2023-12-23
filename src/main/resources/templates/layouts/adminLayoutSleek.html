@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <th:block th:replace="~{/fragments/sleek/metaSleek}"></th:block>
+
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">CMS</title>
+
+    <th:block th:replace="~{/fragments/sleek/stylesSleek}"></th:block>
+    <th:block th:replace="~{/fragments/sleek/scriptsSleek}"></th:block>
+</head>
+
+<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
+
+<script>
+    NProgress.configure({showSpinner: false});
+    NProgress.start();
+</script>
+
+<div class="wrapper">
+
+    <!-- Left Side Bar Fragment -->
+    <div th:replace="~{/fragments/sleek/leftSideBarSleek}"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Header Fragment -->
+        <div th:replace="~{/fragments/sleek/headerSleek}"></div>
+
+        <div class="content-wrapper">
+            <div class="content" layout:fragment="contentSleek">
+
+                <!-- Child content will render here -->
+
+            </div>
+        </div>
+
+        <!-- Footer Fragment -->
+        <div th:replace="~{/fragments/sleek/footerSleek}"></div>
+
+    </div>
+</div>
+
+<!-- Scripts Fragment -->
+<div th:replace="~{/fragments/sleek/bodyScriptsSleek}"></div>
+
+<th:block layout:fragment="childScriptSleek">
+
+    <!--Child script will render here -->
+
+</th:block>
+
+</body>
+</html>

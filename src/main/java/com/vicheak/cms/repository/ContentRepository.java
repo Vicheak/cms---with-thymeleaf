@@ -29,4 +29,15 @@ public interface ContentRepository {
             """)
     void insert(@Param("c") Content content);
 
+    @Delete("DELETE FROM contents WHERE id = #{id}")
+    boolean deleteById(@Param("id") Integer id);
+
+    @Update("""
+            UPDATE contents
+            SET is_deleted = #{isDeleted}
+            WHERE id = #{id}
+            """)
+    boolean updateIsDeletedById(@Param("id") Integer id,
+                                @Param("isDeleted") Boolean isDeleted);
+
 }
