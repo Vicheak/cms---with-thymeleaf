@@ -23,11 +23,11 @@ public interface ContentRepository {
 
     @Insert("""
                 INSERT INTO contents 
-                (uuid, slug, title, description, thumbnail, keyword, is_deleted, created_at)
+                (uuid, slug, title, description, thumbnail, keyword, is_deleted, created_at, category_id)
                 VALUES (#{c.uuid}, #{c.slug}, #{c.title}, #{c.description}, #{c.thumbnail}, #{c.keyword},
-                #{c.isDeleted}, #{c.createdAt})
+                #{c.isDeleted}, #{c.createdAt}, #{catId})
             """)
-    void insert(@Param("c") Content content);
+    void insert(@Param("c") Content content, @Param("catId") Integer categoryId);
 
     @Delete("DELETE FROM contents WHERE id = #{id}")
     boolean deleteById(@Param("id") Integer id);

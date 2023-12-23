@@ -10,4 +10,6 @@ public interface ContentService {
 
     void createNewContent(Content content);
 
+    void deleteContentById(Integer id);
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +44,15 @@ public class CategoryController {
         //System.out.println("Category Name : " + category.getName());
         //System.out.println("Category Is Deleted : " + category.getIsDeleted());
         categoryService.createNewCategory(category);
+
+        return "redirect:/category";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteCategoryById(@PathVariable Integer id){
+        //System.out.println(id);
+
+        categoryService.deleteCategoryById(id);
 
         return "redirect:/category";
     }

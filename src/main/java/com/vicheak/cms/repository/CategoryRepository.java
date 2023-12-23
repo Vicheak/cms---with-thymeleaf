@@ -13,7 +13,6 @@ public interface CategoryRepository {
     @Select("""
                 SELECT * 
                 FROM categories
-                WHERE is_deleted = false
             """)
     @Result(property = "isDeleted", column = "is_deleted")
     List<Category> select();
@@ -23,5 +22,13 @@ public interface CategoryRepository {
                 VALUES (#{c.name}, #{c.isDeleted})
             """)
     void insert(@Param("c") Category category);
+
+    @Update("""
+                UPDATE categories
+                SET is_deleted = #{isDeleted}
+                WHERE id = #{id}
+            """)
+    boolean updateIsDeletedById(@Param("id") Integer id,
+                                @Param("isDeleted") Boolean isDeleted);
 
 }

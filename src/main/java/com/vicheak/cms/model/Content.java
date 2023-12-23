@@ -1,6 +1,7 @@
 package com.vicheak.cms.model;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class Content {
     private String editor;
     private Boolean isDeleted;
     private LocalDateTime createdAt;
+    @NotNull(message = "Please choose a category!")
     private Category category;
 
 }
