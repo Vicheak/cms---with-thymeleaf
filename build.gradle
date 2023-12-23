@@ -22,6 +22,9 @@ repositories {
 }
 
 dependencies {
+    //for validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     //for working with database
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 

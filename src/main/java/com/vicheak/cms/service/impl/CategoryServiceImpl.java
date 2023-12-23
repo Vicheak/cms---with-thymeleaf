@@ -18,4 +18,10 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findCategories() {
         return categoryRepository.select();
     }
+
+    @Override
+    public void createNewCategory(Category category) {
+        categoryRepository.insert(category);
+    }
+
 }

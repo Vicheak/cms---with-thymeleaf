@@ -1,9 +1,7 @@
 package com.vicheak.cms.repository;
 
 import com.vicheak.cms.model.Category;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +17,11 @@ public interface CategoryRepository {
             """)
     @Result(property = "isDeleted", column = "is_deleted")
     List<Category> select();
+
+    @Insert("""
+                INSERT INTO categories (name, is_deleted)
+                VALUES (#{c.name}, #{c.isDeleted})
+            """)
+    void insert(@Param("c") Category category);
 
 }
