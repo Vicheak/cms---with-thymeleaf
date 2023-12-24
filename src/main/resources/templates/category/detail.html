@@ -5,7 +5,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layouts/adminLayoutSleek}">
 <head>
-    <title>Admin Dashboard</title>
+    <title th:text="${category.name}">Category Detail</title>
 </head>
 
 <body>
@@ -13,6 +13,15 @@
 <div class="content" layout:fragment="contentSleek">
 
     <!-- Child content will render here -->
+
+    <div class="card card-default">
+        <div class="card-header card-header-border-bottom">
+            <h2 th:text="${category.name}"></h2>
+        </div>
+        <div class="py-4">
+            <a th:href="@{/category}" class="btn btn-danger ml-3">Back</a>
+        </div>
+    </div>
 
 </div>
 

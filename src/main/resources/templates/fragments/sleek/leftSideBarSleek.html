@@ -24,11 +24,13 @@
         <div class="" data-simplebar style="height: 100%;">
             <!-- sidebar menu -->
             <ul class="nav sidebar-inner" id="sidebar-menu">
+
+                <!-- Dashboard menu -->
                 <li class="has-sub">
                     <a class="sidenav-item-link" data-toggle="collapse" data-target="#dashboard"
                        aria-expanded="false" aria-controls="dashboard">
                         <i class="mdi mdi-view-dashboard-outline"></i>
-                        <span class="nav-text">Content</span> <b class="caret"></b>
+                        <span class="nav-text">Dashboard</span> <b class="caret"></b>
                     </a>
 
                     <ul class="collapse" id="dashboard" data-parent="#sidebar-menu">
@@ -48,10 +50,36 @@
                     </ul>
                 </li>
 
+                <!-- Content menu -->
+                <li class="has-sub">
+                    <a class="sidenav-item-link" data-toggle="collapse" data-target="#content"
+                       aria-expanded="false" aria-controls="content">
+                        <i class="mdi mdi-pencil-box-multiple"></i>
+                        <span class="nav-text">Content</span> <b class="caret"></b>
+                    </a>
+
+                    <ul class="collapse" id="content" data-parent="#sidebar-menu">
+                        <div class="sub-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" th:href="@{/content}">
+                                    <span class="nav-text">View</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a class="sidenav-item-link" th:href="@{/content/form}">
+                                    <span class="nav-text">Create New</span>
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+
+                <!-- Category menu -->
                 <li class="has-sub">
                     <a class="sidenav-item-link" data-toggle="collapse" data-target="#app"
                        aria-expanded="false" aria-controls="app">
-                        <i class="mdi mdi-pencil-box-multiple"></i>
+                        <i class="mdi mdi-folder-multiple-outline"></i>
                         <span class="nav-text">Category</span> <b class="caret"></b>
                     </a>
 
@@ -71,6 +99,32 @@
                         </div>
                     </ul>
                 </li>
+
+                <!-- User menu -->
+                <li class="has-sub">
+                    <a class="sidenav-item-link" data-toggle="collapse" data-target="#user"
+                       aria-expanded="false" aria-controls="user">
+                        <i class="mdi mdi-account-group"></i>
+                        <span class="nav-text">User</span> <b class="caret"></b>
+                    </a>
+
+                    <ul class="collapse" id="user" data-parent="#sidebar-menu">
+                        <div class="sub-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" th:href="@{/user}">
+                                    <span class="nav-text">View</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a class="sidenav-item-link" th:href="@{/user/form}">
+                                    <span class="nav-text">Create New</span>
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </div>

@@ -27,7 +27,7 @@ public class ContentServiceImpl implements ContentService {
         content.setUuid(UUID.randomUUID().toString());
         content.setSlug(SlugUtil.toSlug(content.getTitle()));
         content.setCreatedAt(LocalDateTime.now());
-        contentRepository.insert(content, content.getCategory().getId());
+        contentRepository.insert(content);
     }
 
     @Override
@@ -36,8 +36,22 @@ public class ContentServiceImpl implements ContentService {
 
         boolean isDeleted = contentRepository.updateIsDeletedById(id, true);
 
-        if(!isDeleted)
+        if (!isDeleted)
             throw new RuntimeException("Content is failed to be deleted!");
+    }
+
+    @Override
+    public Content findContentById(Integer id) {
+        return contentRepository.selectById(id)
+                .orElseThrow(
+                        () -> new RuntimeException("There is no content")
+                );
+    }
+
+    @Override
+    public void editContentById(Content editContent) {
+        editContent.setSlug(SlugUtil.toSlug(editContent.getTitle()));
+        contentRepository.update(editContent);
     }
 
 }
