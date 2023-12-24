@@ -16,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findCategories() {
-        return categoryRepository.select();
+        return categoryRepository.select(false);
     }
 
     @Override
@@ -28,8 +28,21 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(Integer id) {
         boolean isDeleted = categoryRepository.updateIsDeletedById(id, true);
 
-        if(!isDeleted)
+        if (!isDeleted)
             throw new RuntimeException("Category is failed to be deleted!");
+    }
+
+    @Override
+    public Category findCategoryById(Integer id) {
+        return categoryRepository.selectById(id)
+                .orElseThrow(
+                        () -> new RuntimeException("There is no category")
+                );
+    }
+
+    @Override
+    public void editCategoryById(Category editCategory) {
+        categoryRepository.update(editCategory);
     }
 
 }

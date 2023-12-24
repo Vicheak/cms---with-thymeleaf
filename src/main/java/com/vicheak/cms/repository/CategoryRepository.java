@@ -5,17 +5,25 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Mapper
 public interface CategoryRepository {
 
-    @Select("""
+    /*@Select("""
                 SELECT * 
                 FROM categories
-            """)
-    @Result(property = "isDeleted", column = "is_deleted")
-    List<Category> select();
+            """)*/
+    @Select("SELECT * FROM func_all_categories(#{status})")
+    @Results(id = "categoryResultMap", value = {
+            @Result(property = "isDeleted", column = "is_deleted")
+    })
+    List<Category> select(@Param("status") Boolean isDeleted);
+
+    @Select("SELECT * FROM categories WHERE id = #{id}")
+    @ResultMap(value = "categoryResultMap")
+    Optional<Category> selectById(@Param("id") Integer id);
 
     @Insert("""
                 INSERT INTO categories (name, is_deleted)
@@ -26,9 +34,17 @@ public interface CategoryRepository {
     @Update("""
                 UPDATE categories
                 SET is_deleted = #{isDeleted}
-                WHERE id = #{id}
+                WHERE id = #{id} 
             """)
     boolean updateIsDeletedById(@Param("id") Integer id,
                                 @Param("isDeleted") Boolean isDeleted);
+
+    @Update("""
+            UPDATE categories
+            SET name = #{c.name},
+            is_deleted = #{c.isDeleted}
+            WHERE id = #{c.id}
+            """)
+    boolean update(@Param("c") Category category);
 
 }

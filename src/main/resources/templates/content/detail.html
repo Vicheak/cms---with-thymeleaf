@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/adminLayoutSleek}">
+<head>
+    <title th:text="${content.title}">Content Detail</title>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+    <script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
+</head>
+
+<body>
+
+<div class="content" layout:fragment="contentSleek">
+
+    <!-- Child content will render here -->
+
+    <div class="card card-default">
+        <div class="card-header card-header-border-bottom">
+            <h1 th:text="${content.title}"></h1>
+        </div>
+
+        <div class="mt-2 pl-3">
+            <span class="mb-2 mr-2 badge badge-pill badge-success" th:text="${content.createdAt}"></span>
+            <span class="mb-2 mr-2 badge badge-pill badge-danger" th:text="${content.category.name}"></span>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <img th:src="@{/file/{thumbnail}(thumbnail = ${content.thumbnail})}" th:alt="${content.title}"
+                         class="w-100">
+                    <hr>
+                    <p class="my-5" th:text="${content.description}"></p>
+                    <hr>
+                    <div th:utext="${content.editor}"></div>
+                    <a th:href="@{/content}" class="btn btn-danger mt-4">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="childScriptSleek">
+
+    <!--Child script will render here -->
+
+    <script>
+        document.querySelectorAll('oembed[url]').forEach(element => {
+            // Create the <a href="..." class="embedly-card"></a> element that Embedly uses
+            // to discover the media.
+            const anchor = document.createElement('a');
+
+            anchor.setAttribute('href', element.getAttribute('url'));
+            anchor.className = 'embedly-card';
+
+            element.appendChild(anchor);
+        });
+    </script>
+
+</th:block>
+
+</body>
+</html>
