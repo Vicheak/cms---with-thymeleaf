@@ -22,6 +22,12 @@ repositories {
 }
 
 dependencies {
+    //for integrating Thymeleaf with Spring Security
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+
+    //for Spring security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
     //for validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 

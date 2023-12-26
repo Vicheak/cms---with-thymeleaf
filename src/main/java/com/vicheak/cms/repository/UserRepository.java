@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Mapper
@@ -14,6 +15,7 @@ public interface UserRepository {
 
     @SelectProvider(UserProvider.class)
     @Results(id = "userResultMap", value = {
+            @Result(property = "id", column = "id"),
             @Result(property = "displayName", column = "display_name"),
             @Result(property = "isDeleted", column = "is_deleted"),
             @Result(property = "createdAt", column = "created_at"),
@@ -24,5 +26,17 @@ public interface UserRepository {
 
     @SelectProvider(UserProvider.class)
     List<Role> selectUserRoles(@Param("userId") Integer userId);
+
+    @InsertProvider(UserProvider.class)
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    boolean insert(@Param("u") User user);
+
+    @InsertProvider(UserProvider.class)
+    boolean insertUserRoles(@Param("userId") Integer userId,
+                            @Param("roleId") Integer roleId);
+
+    @SelectProvider(UserProvider.class)
+    @ResultMap(value = "userResultMap")
+    Optional<User> selectByUsername(@Param("username") String username);
 
 }

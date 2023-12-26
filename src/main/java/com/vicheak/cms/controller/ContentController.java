@@ -105,7 +105,7 @@ public class ContentController {
         return "redirect:/content";
     }
 
-    @PostMapping("/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteContentById(@PathVariable Integer id) {
         //System.out.println(id);
 
