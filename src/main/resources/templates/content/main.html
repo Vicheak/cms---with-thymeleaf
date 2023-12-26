@@ -44,7 +44,7 @@
                         <td th:text="*{keyword}"></td>
                         <td th:text="*{description}"></td>
                         <td>
-                            <img th:src="@{/file/{thumbnail}(thumbnail = *{thumbnail})}" th:alt="*{thumbnail}"
+                            <img th:src="@{/file/{thumbnail}(thumbnail = *{thumbnail})}" th:alt="*{title}"
                                  width="40px" height="auto">
                         </td>
                         <td th:text="*{createdAt}"></td>
