@@ -41,4 +41,12 @@ public class UserProvider implements ProviderMethodResolver {
         }}.toString();
     }
 
+    public String selectByUsername() {
+        return new SQL() {{
+            SELECT("*");
+            FROM("users");
+            WHERE("username = #{username}", "is_deleted = false");
+        }}.toString();
+    }
+
 }

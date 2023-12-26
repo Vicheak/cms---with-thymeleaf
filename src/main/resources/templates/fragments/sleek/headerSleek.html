@@ -1,4 +1,7 @@
-<header class="main-header " id="header">
+<header class="main-header " id="header"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <nav class="navbar navbar-static-top navbar-expand-lg">
         <!-- Sidebar toggle button -->
         <button id="sidebar-toggler" class="sidebar-toggle">
@@ -550,14 +553,15 @@
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <img th:src="@{/sleek/assets/img/user/admin.jpg}" class="user-image" alt="User Image"
                              width="40px" height="auto"/>
-                        <span class="d-none d-lg-inline-block">Admin</span>
+                        <span class="d-none d-lg-inline-block" sec:authentication="name"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <!-- User image -->
                         <li class="dropdown-header">
                             <img th:src="@{/sleek/assets/img/user/admin.jpg}" class="img-circle" alt="User Image"/>
                             <div class="d-inline-block">
-                                Admin <small class="pt-1">admin@gmail.com</small>
+                                <!--<span sec:authentication="name"></span>-->
+                                <span th:text="${#authentication.getPrincipal().user.displayName}"></span>
                             </div>
                         </li>
                         <li>
@@ -578,7 +582,13 @@
                         </li>
 
                         <li class="dropdown-footer">
-                            <a href="index.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                            <form th:action="@{/auth/logout}"
+                                  method="post">
+                                <button type="submit" class="btn btn-link text-decoration-none text-danger pl-4">
+                                    <i class="mdi mdi-logout mr-2"></i>
+                                    Log Out
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </li>

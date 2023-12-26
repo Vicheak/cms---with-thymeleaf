@@ -1,4 +1,7 @@
-<aside class="left-sidebar bg-sidebar">
+<aside class="left-sidebar bg-sidebar"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Application Brand -->
         <div class="app-brand">
@@ -26,7 +29,7 @@
             <ul class="nav sidebar-inner" id="sidebar-menu">
 
                 <!-- Dashboard menu -->
-                <li class="has-sub">
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="has-sub">
                     <a class="sidenav-item-link" data-toggle="collapse" data-target="#dashboard"
                        aria-expanded="false" aria-controls="dashboard">
                         <i class="mdi mdi-view-dashboard-outline"></i>

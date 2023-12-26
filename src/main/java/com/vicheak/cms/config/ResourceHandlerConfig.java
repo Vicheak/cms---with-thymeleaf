@@ -14,10 +14,21 @@ public class ResourceHandlerConfig implements WebMvcConfigurer {
     @Value("${file.client-path}")
     private String clientPath;
 
+    @Value("${resource.server-path}")
+    private String resourceServerPath;
+
+    @Value("${resource.client-path}")
+    private String resourceClientPath;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //configure file system resources
         registry.addResourceHandler(clientPath)
                 .addResourceLocations("file:" + serverPath);
+
+        //configure classpath resources
+        registry.addResourceHandler(resourceClientPath)
+                .addResourceLocations("classpath:" + resourceServerPath);
     }
 
 }

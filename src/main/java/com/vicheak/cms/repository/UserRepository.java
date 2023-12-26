@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Mapper
@@ -33,5 +34,9 @@ public interface UserRepository {
     @InsertProvider(UserProvider.class)
     boolean insertUserRoles(@Param("userId") Integer userId,
                             @Param("roleId") Integer roleId);
+
+    @SelectProvider(UserProvider.class)
+    @ResultMap(value = "userResultMap")
+    Optional<User> selectByUsername(@Param("username") String username);
 
 }

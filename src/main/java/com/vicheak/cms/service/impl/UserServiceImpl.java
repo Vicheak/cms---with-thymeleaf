@@ -4,6 +4,7 @@ import com.vicheak.cms.model.User;
 import com.vicheak.cms.repository.UserRepository;
 import com.vicheak.cms.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAllUsers() {
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
         user.setUuid(UUID.randomUUID().toString());
         user.setIsDeleted(false);
         user.setCreatedAt(LocalDate.now());
+
+        //encode the raw password
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         //save new user to the database
         userRepository.insert(user);

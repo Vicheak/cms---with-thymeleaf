@@ -53,7 +53,7 @@ public class CategoryController {
         return "redirect:/category";
     }
 
-    @PostMapping("/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteCategoryById(@PathVariable Integer id) {
         //System.out.println(id);
 

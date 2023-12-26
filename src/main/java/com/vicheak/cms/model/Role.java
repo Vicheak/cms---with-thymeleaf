@@ -1,6 +1,7 @@
 package com.vicheak.cms.model;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 @Getter
 @Setter
@@ -8,9 +9,14 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Role {
+public class Role implements GrantedAuthority {
 
     private Integer id;
     private String name;
 
+    @Override
+    public String getAuthority() {
+        //ex : ROLE_ADMIN, ...
+        return "ROLE_" + name;
+    }
 }
