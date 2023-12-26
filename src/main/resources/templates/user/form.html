@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/adminLayoutSleek}">
+<head>
+    <title>User Form</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="contentSleek">
+
+    <!-- Child content will render here -->
+
+    <h1 class="h3 mb-3"><strong>Create New User</strong></h1>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <form th:action="@{/user/create(isEditAction = ${isEditAction})}"
+                  method="post"
+                  th:object="${user}">
+                <input type="hidden" th:field="*{id}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input th:field="*{username}" type="text" class="form-control" id="username">
+                    <span th:if="${#fields.hasErrors('username')}"
+                          th:errors="*{username}" class="text-danger">Validation Message</span>
+                </div>
+                <div class="mb-3">
+                    <label for="display_name" class="form-label">Display Name</label>
+                    <input th:field="*{displayName}" type="text" class="form-control" id="display_name">
+                    <span th:if="${#fields.hasErrors('displayName')}"
+                          th:errors="*{displayName}" class="text-danger">Validation Message</span>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input th:field="*{password}" type="password" class="form-control" id="password">
+                    <span th:if="${#fields.hasErrors('password')}"
+                          th:errors="*{password}" class="text-danger">Validation Message</span>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="roles" class="form-label">Select the role</label>
+                    <label th:each="role, stat : ${roles}"
+                           class="control control-checkbox checkbox-primary">
+                        <span th:text="${role.name}"></span>
+                        <input type="checkbox" id="roles"
+                               th:value="${role.id}"
+                               th:field="*{roles[__${stat.index}__].id}">
+                        <div class="control-indicator"></div>
+                    </label>
+                    <span th:if="${#fields.hasErrors('roles')}"
+                          th:errors="*{roles}" class="text-danger">Validation Message</span>
+                </div>
+                <div class="mt-4">
+                    <a th:href="@{/user}" class="btn btn-dark">Back</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="childScriptSleek">
+
+    <!--Child script will render here -->
+
+</th:block>
+
+</body>
+
+</html>
