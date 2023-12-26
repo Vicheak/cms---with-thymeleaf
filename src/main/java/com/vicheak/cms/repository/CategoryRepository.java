@@ -1,6 +1,7 @@
 package com.vicheak.cms.repository;
 
 import com.vicheak.cms.model.Category;
+import com.vicheak.cms.repository.provider.CategoryProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -15,13 +16,15 @@ public interface CategoryRepository {
                 SELECT * 
                 FROM categories
             """)*/
-    @Select("SELECT * FROM func_all_categories(#{status})")
+    //@Select("SELECT * FROM func_all_categories(#{status})")
+    @SelectProvider(CategoryProvider.class)
     @Results(id = "categoryResultMap", value = {
             @Result(property = "isDeleted", column = "is_deleted")
     })
     List<Category> select(@Param("status") Boolean isDeleted);
 
-    @Select("SELECT * FROM categories WHERE id = #{id}")
+    //@Select("SELECT * FROM categories WHERE id = #{id}")
+    @SelectProvider(CategoryProvider.class)
     @ResultMap(value = "categoryResultMap")
     Optional<Category> selectById(@Param("id") Integer id);
 
